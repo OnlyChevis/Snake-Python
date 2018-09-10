@@ -1,5 +1,4 @@
 #Snake Python Game
-#By Maxim Shmakov
 #Nickname Chevis
 
 import turtle
