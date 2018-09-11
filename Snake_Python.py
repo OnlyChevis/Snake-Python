@@ -1,5 +1,5 @@
 #Snake Python Game
-#Nickname Chevis
+#Changed Maxim Shmakov (Chevis)
 
 import turtle
 import time
@@ -47,17 +47,7 @@ food.speed(0)
 food.shape("circle")
 food.color("#db494a") #Food color
 food.penup()
-food.goto(random.randint(-bordersize + 10,bordersize - 10),random.randint(-bordersize + 10,bordersize - 10))
-
-#Ultimate Food
-ulti_food = turtle.Turtle()
-ulti_food.speed(0)
-ulti_food.shape("circle")
-ulti_food.color("#3f48cc") #Food color
-ulti_food.penup()
-ulti_food.turtlesize(1.5,1.5)
-ulti_food.hideturtle()
-ulti_food.goto(random.randint(-bordersize + 10,bordersize - 10),random.randint(-bordersize + 10,bordersize - 10))
+food.goto(random.randint(-bordersize + 20,bordersize - 20),random.randint(-bordersize + 20,bordersize - 20))
 
 #Create segments
 segments = []
@@ -129,18 +119,21 @@ while True:
         segments.clear()
 
         delay = 0.1
-
         score = 0
-
         leftscore = random.randint(3,8)
 
-        print("Snake is dead")
+        food.color("#db494a")
+        food.turtlesize(1)
+
+        x = random.randint(-bordersize + 20, bordersize - 20)
+        y = random.randint(-bordersize + 20, bordersize - 20)
+        food.goto(x,y)
 
         pen.clear()
-        pen.write("Score: {} High Score: {}".format(score,highscore), align="center", font=("Courier New", 24, "normal"))
+        pen.write("Score: {} High Score: {}".format(score,highscore,), align="center", font=("Courier New", 24, "normal"))
 
     #Collision with the food
-    if leftscore != 0 and snake.distance(food) < 20:
+    if snake.distance(food) < 20:
         #Add a segments
         new_segment = turtle.Turtle()
         new_segment.speed(0)
@@ -148,52 +141,36 @@ while True:
         new_segment.color("#72b573")
         new_segment.penup()
         segments.append(new_segment)
-
-        delay -= 0.002
-
-        #Add a score
-        score += 10
-             
-        leftscore -= 1
-
-        if score > highscore:
-            highscore = score
-
-        pen.clear()
-        pen.write("Score: {} High Score: {}".format(score,highscore), align="center", font=("Courier New", 24, "normal"))
-
-        print("Colled food")
 
         if leftscore == 0:
-            food.hideturtle()
-            ulti_food.showturtle()
+            food.color("#db494a")
+            food.turtlesize(1)
 
-            x = random.randint(-bordersize + 10, bordersize - 10)
-            y = random.randint(-bordersize +10, bordersize - 10)
-            ulti_food.goto(x,y)
+            #Speed delay
+            delay -= 0.002
+            #Reset score
+            leftscore = random.randint(3,8)
+            #Add a score
+            score += 50
+
         else:
-            x = random.randint(-bordersize + 10, bordersize - 10)
-            y = random.randint(-bordersize +10, bordersize - 10)
-            food.goto(x,y)
+            #Speed delay
+            delay -= 0.001
+            #Add a score
+            score += 10
 
-    #Collision with the ultimate food
-    if leftscore == 0 and snake.distance(ulti_food) < 25:
-        #Add a segments
-        new_segment = turtle.Turtle()
-        new_segment.speed(0)
-        new_segment.shape("circle")
-        new_segment.color("#72b573")
-        new_segment.penup()
-        segments.append(new_segment)
+            leftscore -= 1
 
-        delay -= 0.004
+            if leftscore == 0:
+                food.color("#3f48cc")
+                food.turtlesize(1.5)
+            else:
+                food.color("#db494a")
+                food.turtlesize(1)
 
-        #Add a score
-        score += 50
-             
-        leftscore = random.randint(3,8)
-        
-        print("Colled ultimate food")
+        x = random.randint(-bordersize + 20, bordersize - 20)
+        y = random.randint(-bordersize + 20, bordersize - 20)
+        food.goto(x,y)
 
         if score > highscore:
             highscore = score
@@ -201,18 +178,12 @@ while True:
         pen.clear()
         pen.write("Score: {} High Score: {}".format(score,highscore), align="center", font=("Courier New", 24, "normal"))
 
-        food.showturtle()
-        ulti_food.hideturtle()
-
-        x = random.randint(-bordersize + 10, bordersize - 10)
-        y = random.randint(-bordersize +10, bordersize - 10)
-        food.goto(x,y)
-        
     #Moving segments
     for index in range(len(segments)-1,0,-1):
         x = segments[index-1].xcor()
         y = segments[index-1].ycor()
         segments[index].goto(x,y)
+
 
     #Collision with the segments
     for segment in segments:
@@ -227,12 +198,15 @@ while True:
             segments.clear()
 
             delay = 0.1
-
             score = 0
-            
             leftscore = random.randint(3,8)
             
-            print("Snake is dead")
+            food.color("#db494a")
+            food.turtlesize(1)
+
+            x = random.randint(-bordersize + 20, bordersize - 20)
+            y = random.randint(-bordersize + 20, bordersize - 20)
+            food.goto(x,y)
 
             pen.clear()
             pen.write("Score: {} High Score: {}".format(score,highscore), align="center", font=("Courier New", 24, "normal"))
